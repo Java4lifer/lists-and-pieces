@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 export default function Fun() {
     const[input, setInput] = useState("");
-    const[editask, setTaskas] = useState({
+    const[editask, setTasks] = useState({
         enabled: false,
         task: ''
     });
@@ -16,7 +16,21 @@ function regigi() {
         alert("Put task, you mongolian")
         return;
     }
+    if(editask.enabled) {
+        editaskSave();
+        setTasks({
+            enabled: false,
+            task: ""
+        })
+        return;
+    }
     newTask(task => [...task, input])
+}
+function editaskSave() {
+    const getIndex = task.findIndex(task => task === editask.task)
+    const allTasks =  [...task];
+    allTasks[getIndex] = input;
+    newTask(allTasks)
 }
 function dieTask(item:string){
     const kill = task.filter(task => task !== item)
@@ -24,7 +38,7 @@ function dieTask(item:string){
 }
 function susTask(item:string) {
     setInput(item)
-    setTaskas({
+    setTasks({
         enabled: true,
         task: item
     })
