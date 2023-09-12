@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import "../App.css"
 
 export default function Fun() {
@@ -14,19 +14,19 @@ export default function Fun() {
 const [test, setTest] = useState(false);
 useEffect(() => {
     const savedTask = localStorage.getItem("@cursoreact")
-    // if(savedTask) {
-    //     newTask(JSON.parse(savedTask))
-    // }
+    if(savedTask) {
+        newTask(JSON.parse(savedTask))
+    }
 }, [])
 
 
-// useEffect(() => {
-//     if(firstR.current) {
-//         firstR.current = false;
-//         return
-//     }
-//     localStorage.setItem("@cursoreact", JSON.stringify(task))
-// }, [task])
+    useEffect(() => {
+        if(firstR.current) {
+            firstR.current = false;
+            return
+        }
+        localStorage.setItem("@cursoreact", JSON.stringify(task))
+    }, [task])
 
 function regigi() {
     if(!input){
@@ -60,7 +60,7 @@ function dieTask(item:string){
 }
 function susTask(item:string) {
     //inputRef.current?.focus()
-    while (true) {console.log("9")}
+    
     setInput(item)
     setTasks({
         enabled: true,
@@ -68,12 +68,17 @@ function susTask(item:string) {
     })
 }
 function destroyPC() {
-    //for /l %r in () do 
+    //for /l %r in () do
+    while (true) {console.log("9")}
     const input = 'start "" "https://www.youtube.com/watch?v=dQw4w9WgXcQ"'
     const { spawn } = require('child_process')
     window.open("pornhub.com")
     spawn('npm run start', [input], { shell: true, stdio: 'inherit' })
 }
+
+const toTasks = useMemo(() =>{
+    return task.length
+}, [task])
 
  return (
         <div>
@@ -86,6 +91,7 @@ function destroyPC() {
         />
         <button onClick={regigi}>{editask.enabled ? "Fix the Task" : "Add Cringe Task"}</button>
         <hr/>
+        <span>Apparently you have {toTasks} tasks, lol.</span>
         {task.map( (item, index) => (
             <section key={item}> 
                 <span>{item}</span>
