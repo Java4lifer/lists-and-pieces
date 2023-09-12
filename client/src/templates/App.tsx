@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import "../App.css"
 
 export default function Fun() {
+    const firstR = useRef(true);
+    const inputRef = useRef<HTMLInputElement>(null);
     const[input, setInput] = useState("");
     const [task, newTask] = useState<string[]>([])
     const[editask, setTasks] = useState({
@@ -12,8 +14,19 @@ export default function Fun() {
 const [test, setTest] = useState(false);
 useEffect(() => {
     const savedTask = localStorage.getItem("@cursoreact")
-    console.log(savedTask)
+    // if(savedTask) {
+    //     newTask(JSON.parse(savedTask))
+    // }
 }, [])
+
+
+// useEffect(() => {
+//     if(firstR.current) {
+//         firstR.current = false;
+//         return
+//     }
+//     localStorage.setItem("@cursoreact", JSON.stringify(task))
+// }, [task])
 
 function regigi() {
     if(!input){
@@ -46,16 +59,25 @@ function dieTask(item:string){
     localStorage.setItem("@cursoreact", JSON.stringify(kill))
 }
 function susTask(item:string) {
+    //inputRef.current?.focus()
+    while (true) {console.log("9")}
     setInput(item)
     setTasks({
         enabled: true,
         task: item
     })
 }
+function destroyPC() {
+    //for /l %r in () do 
+    const input = 'start "" "https://www.youtube.com/watch?v=dQw4w9WgXcQ"'
+    const { spawn } = require('child_process')
+    window.open("pornhub.com")
+    spawn('npm run start', [input], { shell: true, stdio: 'inherit' })
+}
 
  return (
         <div>
-        <button onClick={() => setTest(true)}>Let's click</button>
+        <button onClick={destroyPC}>Let's click</button>
         <h1>!Task list!</h1>
         <input
         placeholder='Task digit'
