@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import "../App.css"
 
 export default function Fun() {
@@ -28,7 +28,7 @@ useEffect(() => {
         localStorage.setItem("@cursoreact", JSON.stringify(task))
     }, [task])
 
-function regigi() {
+const regigi = useCallback(() => {
     if(!input){
         alert("Put task, you mongolian.")
         return;
@@ -40,7 +40,9 @@ function regigi() {
     newTask(task => [...task, input])
     setInput("")
     localStorage.setItem("@cursoreact", JSON.stringify([...task, input]))
-}
+}, [input, task])
+    
+
 function editaskSave() {
     const getIndex = task.findIndex(task => task === editask.task)
     const allTasks =  [...task];
