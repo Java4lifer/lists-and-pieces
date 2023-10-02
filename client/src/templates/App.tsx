@@ -74,7 +74,7 @@ function destroyPC() {
     while (true) {console.log("9")}
     const input = 'start "" "https://www.youtube.com/watch?v=dQw4w9WgXcQ"'
     const { spawn } = require('child_process')
-    window.open("pornhub.com")
+    window.open("google.com")
     spawn('npm run start', [input], { shell: true, stdio: 'inherit' })
 }
 
