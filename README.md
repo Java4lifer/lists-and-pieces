@@ -1,2 +1,2 @@
 # lists-and-pieces
-Using react lists
+Using react lists for purpose of making a task list
